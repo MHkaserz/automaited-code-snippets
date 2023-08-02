@@ -36,9 +36,11 @@ npm run package
 - It is far from perfect:
   - No warning when leaving a widget without saving.
   - No warning when deleting.
-  - The external package that handles highlighting is meh.
-  - It only highlights Javascript, for now, the functionality for changing it is there, just not the highlighting integration.
-  - The nicer highlighter didn't have an edit while highlighting functionality, I could have used the best of both worlds but this already took too long.
+  - <s>The external package that handles highlighting is meh.</s>
+  - <s>It only highlights Javascript, for now, the functionality for changing it is there, just not the highlighting integration.</s>
+  - <s>The nicer highlighter didn't have an edit while highlighting functionality, I could have used the best of both worlds but this already took too long.</s>
+  
+  <br/>
  
 - Difficulties
   - Nothing to note technically speaking.
