@@ -61,7 +61,11 @@ export default function Dashboard() {
       <div className='dashboard-body'>
         <AddCodeSnippet />
         {Object.entries(codeSnippets).map(([key, codeSnippet]) => {
-          if (curFilter.length && !codeSnippet.title.toLocaleLowerCase().includes(curFilter.toLocaleLowerCase())) return;
+          if (  curFilter.length
+             && !codeSnippet.title.toLocaleLowerCase().includes(curFilter.toLocaleLowerCase())
+             && !codeSnippet.desc.toLocaleLowerCase().includes(curFilter.toLocaleLowerCase())
+          ) return;
+
           return (
             <Link className='dashboard-card-container' to={`/code-snippets/${key}`} key={key}>
               <FaTrash
