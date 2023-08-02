@@ -28,7 +28,21 @@ npm run package
 ## Features
 
 - CRUD snippet
-- Snippet look up using title
+- Snippet look-up using title/description
+- Autosave 5 seconds after changes
+
+## Notes
+
+- It is far from perfect:
+  - No warning when leaving a widget without saving.
+  - No warning when deleting.
+  - The external package that handles highlighting is meh.
+  - It only highlights Javascript, for now, the functionality for changing it is there, just not the highlighting integration.
+  - The nicer highlighter didn't have an edit while highlighting functionality, I could have used the best of both worlds but this already took too long.
+ 
+- Difficulties
+  - Nothing to note technically speaking.
+  - The timeframe set for this challenge is somewhat tight.
 
 ## Maintainer
 
