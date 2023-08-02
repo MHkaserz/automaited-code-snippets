@@ -114,7 +114,6 @@ const createWindow = async () => {
     icon: getAssetPath('icon.png'),
     frame: false,
     webPreferences: {
-      devTools: false,
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
@@ -123,7 +122,6 @@ const createWindow = async () => {
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
   mainWindow.webContents.openDevTools({ mode: 'detach' });
-  mainWindow.webContents.closeDevTools();
 
   mainWindow.on('ready-to-show', async () => {
     if (!mainWindow) {

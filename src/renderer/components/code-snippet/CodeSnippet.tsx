@@ -1,16 +1,18 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import CodeEditor from 'react-simple-code-editor';
 import { CodeSnippetsContext } from 'renderer/contexts/CodeSnippetsContext';
 import { FaHome, FaTrash, FaSave } from 'react-icons/fa';
-
-const { highlight, languages } = require('prismjs/components/prism-core');
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-javascript';
-
-import 'prismjs/themes/prism.css';
-import './CodeSnippet.scss';
+import AceEditor from "react-ace";
 import { TCodeSnippet } from 'main/main';
+
+import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/mode-typescript";
+import "ace-builds/src-noconflict/mode-css";
+import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/ext-language_tools";
+
+import './CodeSnippet.scss';
 
 export default function CodeSnippet() {
   const navigate = useNavigate();
@@ -79,6 +81,7 @@ export default function CodeSnippet() {
     navigate('/');
   }
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   let supportedLangs = ['javascript', 'typescript', 'python', 'css'];
 
   return (
@@ -108,19 +111,25 @@ export default function CodeSnippet() {
         <FaSave  className='delete-icon' size={40} fill='var(--notify)' onClick={() => handleSetCodeSnippet ()} />
         <FaTrash className='save-icon'   size={35} fill='var(--err)'    onClick={() => handleDelCodeSnippet ()} />
       </div>
-      <CodeEditor
+      <AceEditor
         className='code-snippet-code'
+        theme='monokai'
+        mode={snippetType}
+        name={codeSnippetId}
+        onChange={(val: string) => setSnippetCode(val)}
         value={snippetCode}
-        onValueChange={(newCode: string) => setSnippetCode(newCode)}
-        highlight={(code: string) => highlight(code, languages.js)}
-        padding={20}
-        style={{
-          fontFamily: '"Fira code", "Fira Mono", monospace',
-          fontSize: 24,
+        wrapEnabled
+        showGutter
+        highlightActiveLine
+        fontSize={24}
+        setOptions={{
+          enableBasicAutocompletion: false,
+          enableLiveAutocompletion: false,
+          enableSnippets: false,
+          showLineNumbers: true,
+          tabSize: 2,
         }}
-      >
-        {snippetCode}
-      </CodeEditor>
+      />
       <div className="code-snippet-desc">
         <span>Description</span>
         <textarea
