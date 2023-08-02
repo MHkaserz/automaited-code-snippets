@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { CodeSnippetsContext } from 'renderer/contexts/CodeSnippetsContext';
 import { FaHome, FaTrash, FaSave } from 'react-icons/fa';
@@ -81,7 +81,6 @@ export default function CodeSnippet() {
     navigate('/');
   }
 
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
   let supportedLangs = ['text', 'javascript', 'typescript', 'python', 'css'];
 
   return (
