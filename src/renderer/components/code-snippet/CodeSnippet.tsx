@@ -82,7 +82,7 @@ export default function CodeSnippet() {
   }
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  let supportedLangs = ['javascript', 'typescript', 'python', 'css'];
+  let supportedLangs = ['text', 'javascript', 'typescript', 'python', 'css'];
 
   return (
     <div className='code-snippet-container'>
@@ -96,6 +96,7 @@ export default function CodeSnippet() {
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleValueChange(event, setSnippetTitle)}
       />
       <select 
+        defaultValue={'text'}
         value={snippetType}
         className='code-snippet-select'
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => handleValueChange(event, setSnippetType )}

@@ -95,7 +95,7 @@ const handleAddCodeSnippet = (
   const newCodeSnippet: TCodeSnippet = {
     id: codeSnippetId,
     title: 'New Snippet',
-    type: 'unset',
+    type: 'text',
     code: '',
     desc: '',
   };
