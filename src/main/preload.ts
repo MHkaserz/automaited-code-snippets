@@ -2,7 +2,7 @@
 /* eslint no-unused-vars: off */
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
-export type Channels = 'load-local-store' | 'save';
+export type Channels = 'load-local-store' | 'save' | 'exit-app' | 'minimize-app';
 
 const electronHandler = {
   ipcRenderer: {

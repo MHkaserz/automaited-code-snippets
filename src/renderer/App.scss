@@ -4,4 +4,8 @@
   color: var(--prim-def-col-fg);
   width: 100vw;
   height: 100vh;
+
+  display: grid;
+  grid-template-rows: 50px calc(100vh - 50px);
+  place-items: center;
 }

@@ -1,3 +1,45 @@
-div {
-   border: initial;
+.draggable-header {
+   display: grid;
+   width: 100vw;
+   height: 100%;
+   grid-template-columns: max-content auto 100px;
+   user-select: none;
+   place-items: center;
+   background-color: var(--tert-def-col-bg);
+
+   .dragbar-title {
+      text-indent: 15px;
+      -webkit-app-region: drag;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+   }
+
+   .dragbar-draggable {
+      -webkit-app-region: drag;
+      width: 100%;
+      height: 100%;
+   }
+
+   .dragbar-actions {
+      display: grid;
+      height: 100%;
+      width: 100%;
+      grid-template-columns: 50% 50%;
+      place-items: center;
+
+      .icon-container {
+         width: 100%;
+         height: 100%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         cursor: pointer;
+
+         &:hover {
+            background: var(--scnd-def-col-bg);
+         }
+      }
+   }
 }

@@ -61,6 +61,14 @@ ipcMain.on('load-local-store', async (event) => {
   event.reply('load-local-store', storedCodeSnippets);
 });
 
+ipcMain.on('minimize-app', () => {
+  if(mainWindow) mainWindow.minimize();
+});
+
+ipcMain.on('exit-app', (event) => {
+  app.quit();
+});
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -104,6 +112,7 @@ const createWindow = async () => {
     width: 1024 * 1.5,
     height: 728 * 1.5,
     icon: getAssetPath('icon.png'),
+    frame: false,
     webPreferences: {
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')

@@ -1,9 +1,10 @@
 
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { CodeSnippetsContext } from 'renderer/contexts/CodeSnippetsContext';
 import { TCodeSnippet } from 'main/main';
+import { FaPlus, FaTrash, FaSearch } from 'react-icons/fa';
 
 import './Dashboard.scss';
 
@@ -14,27 +15,70 @@ function AddCodeSnippet() {
   );
 
   return (
-    <div onClick={() => handleAddCodeSnippet(addCodeSnippet, navigate)}>
-      +
+    <div className='dashboard-card add-card' onClick={() => handleAddCodeSnippet(addCodeSnippet, navigate)}>
+      <FaPlus size={80} />
     </div>
   );
 }
 
 export default function Dashboard() {
-  const { codeSnippets } = useContext(
+  const [ filter, setFilter ] = useState('');
+  const [ curFilter, setCurFilter] = useState(filter);
+  const { codeSnippets, removeCodeSnippet } = useContext(
     CodeSnippetsContext
   );
+  
+  let timerId: NodeJS.Timeout;
+  const debounceDelay = 200;
+
+  // Debounce the setCurFilter function using useMemo
+  useEffect(() => {
+    timerId = setTimeout(() => {
+      setCurFilter(filter);
+    }, debounceDelay);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [filter]);
+
+  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget;
+    setFilter(value);
+  };
 
   return (
-    <div>
-      <AddCodeSnippet />
-      {Object.entries(codeSnippets).map(([key, codeSnippet]) => {
-        return (
-          <Link to={`/code-snippets/${key}`} key={key}>
-            {codeSnippet.title}
-          </Link>
-        );
-      })}
+    <div className='dashboard'>
+      <div className='dashboard-filter-area'>
+        <input
+          type='text'
+          value={filter}
+          className='dashboard-filter-input'
+          onChange={handleFilterChange}
+        />
+        <FaSearch className='filter-icon' size={25} fill='var(--prim-def-col-fg)' />
+      </div>
+      <div className='dashboard-body'>
+        <AddCodeSnippet />
+        {Object.entries(codeSnippets).map(([key, codeSnippet]) => {
+          if (curFilter.length && !codeSnippet.title.toLocaleLowerCase().includes(curFilter.toLocaleLowerCase())) return;
+          return (
+            <Link className='dashboard-card-container' to={`/code-snippets/${key}`} key={key}>
+              <FaTrash
+                className='card-delete-icon'
+                size={30} fill='var(--err)'
+                onClick={(event: React.MouseEvent<SVGElement>) => {
+                  event.stopPropagation();
+                  removeCodeSnippet(codeSnippet);
+                }}
+              />
+              <div className='dashboard-card'>
+                {codeSnippet.title}
+              </div>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }
