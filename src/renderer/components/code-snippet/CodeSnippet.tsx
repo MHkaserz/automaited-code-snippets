@@ -27,7 +27,7 @@ export default function CodeSnippet() {
   const [snippetDesc, setSnippetDesc] = useState<string>('');
 
   useEffect(() => {
-    if (codeSnippetId) {
+    if (codeSnippetId && codeSnippetId.length === 36) {
       const storedSnippet = getCodeSnippet(codeSnippetId);
       if (storedSnippet === undefined) {
         navigate('/');
