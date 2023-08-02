@@ -31,7 +31,7 @@ export default function Dashboard() {
   let timerId: NodeJS.Timeout;
   const debounceDelay = 200;
 
-  // Debounce the setCurFilter function using useMemo
+  // Debounce the setCurFilter function using a timeout
   useEffect(() => {
     timerId = setTimeout(() => {
       setCurFilter(filter);

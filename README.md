@@ -36,6 +36,7 @@ npm run package
 - It is far from perfect:
   - No warning when leaving a widget without saving.
   - No warning when deleting.
+  - No time to ship the fonts with the production package.
   - <s>The external package that handles highlighting is meh.</s>
   - <s>It only highlights Javascript, for now, the functionality for changing it is there, just not the highlighting integration.</s>
   - <s>The nicer highlighter didn't have an edit while highlighting functionality, I could have used the best of both worlds but this already took too long.</s>
@@ -45,6 +46,7 @@ npm run package
 - Difficulties
   - Nothing to note technically speaking.
   - The timeframe set for this challenge is somewhat tight.
+  - There is a WindowsOS specific bug related to electron-store.
 
 ## Maintainer
 

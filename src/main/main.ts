@@ -65,7 +65,7 @@ ipcMain.on('minimize-app', () => {
   if(mainWindow) mainWindow.minimize();
 });
 
-ipcMain.on('exit-app', (event) => {
+ipcMain.on('exit-app', () => {
   app.quit();
 });
 
